@@ -10,6 +10,8 @@ main_page_head = '''
 <head>
     <meta charset="utf-8">
     <title>Fresh Tomatoes!</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap 3 -->
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
@@ -38,6 +40,7 @@ main_page_head = '''
         .movie-tile {
             margin-bottom: 20px;
             padding-top: 20px;
+            height: 500px;
         }
         .movie-tile:hover {
             background-color: #EEE;
@@ -55,6 +58,13 @@ main_page_head = '''
             left: 0;
             top: 0;
             background-color: white;
+        }
+        @media screen and (max-width: 640px){
+            #trailer .modal-dialog {
+                margin-top: 200px;
+                width: 90vw;
+                height: 90vh;
+            }
         }
     </style>
     <script type="text/javascript" charset="utf-8">
@@ -125,6 +135,7 @@ movie_tile_content = '''
 <div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="{trailer_youtube_id}" data-toggle="modal" data-target="#trailer">
     <img src="{poster_image_url}" width="220" height="342">
     <h2>{movie_title}</h2>
+    <p>{movie_storyline}</p>
 </div>
 '''
 
@@ -145,7 +156,8 @@ def create_movie_tiles_content(movies):
         content += movie_tile_content.format(
             movie_title=movie.title,
             poster_image_url=movie.poster_image_url,
-            trailer_youtube_id=trailer_youtube_id
+            trailer_youtube_id=trailer_youtube_id,
+            movie_storyline=movie.storyline
         )
     return content
 
